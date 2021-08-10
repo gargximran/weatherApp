@@ -1,4 +1,24 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import weatherService from "../../helpers/weatherService";
+import weatherDataFormatter from "../../helpers/weatherDataFormatter";
+
+
+
+export const fetchWeatherInformation = createAsyncThunk(
+    'weather/fetchWeatherInformation',
+    async () => {
+
+            try{
+                const weatherInfo = await weatherService();
+
+                return weatherDataFormatter(weatherInfo)
+
+            }catch(e) {
+                return {}
+            }
+
+    }
+)
 
 
 
@@ -10,26 +30,28 @@ const weatherSlice = createSlice({
         param: 'c'
     },
     reducers: {
-        insertData: (state, action) => {
-            state.loading = false;
-            state.data = action.payload;
-        },
-        startLoading: state => {
-            state.loading = true;
-        },
         changeParam: (state, action) => {
             state.param = action.payload;
         }
+    },
+    extraReducers: builder => {
+        builder.addCase(fetchWeatherInformation.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.loading = false;
+        })
+
+        builder.addCase(fetchWeatherInformation.pending, (state, action) => {
+            state.loading = true;
+        })
     }
+
 })
 
 
 export default weatherSlice.reducer
 
 export const {
-    insertData,
-    startLoading,
-    changeParam
+    changeParam,
 } = weatherSlice.actions
 
 

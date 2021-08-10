@@ -1,20 +1,30 @@
+import { useDispatch, useSelector } from 'react-redux';
+import {changeParam, weatherDataSelector, fetchWeatherInformation} from "../store/slices/weatherSlice";
+
+
+
 import RadioButton from "./RadioButton";
-import {useState} from "react";
+
 
 const WeatherScreen = () => {
+
+    const dispatch = useDispatch();
+
 
     const tempParams = [
         {
             label: 'Celsius',
-            value: 'cel'
+            value: 'c'
         },
         {
             label: 'Fahrenheit',
-            value: 'fh'
+            value: 'f'
         }
     ]
 
-    const [activeParam, setActiveParam] = useState('cel')
+    const { param:activeParam } = useSelector(weatherDataSelector)
+
+
 
 
     return (
@@ -23,11 +33,21 @@ const WeatherScreen = () => {
                 <div className={'hidden md:block'}>
 
                 </div>
-                <RadioButton onClick={(v) => setActiveParam(v)} value={tempParams[0].value} label={tempParams[0].label} activeValue={activeParam}  />
-                <RadioButton onClick={(v) => setActiveParam(v)} value={tempParams[1].value} label={tempParams[1].label} activeValue={activeParam}  />
+                <div className="col-span-2 md:col-span-1">
+                    <div className={'flex justify-start md:justify-center pl-4'}>
+                        <RadioButton onClick={(v) => dispatch(changeParam(v))} value={tempParams[0].value} label={tempParams[0].label} activeValue={activeParam}  />
+                    </div>
+                </div>
+                <div className="col-span-2 md:col-span-1">
+                    <div className="flex justify-end md:justify-center pr-4">
+                        <RadioButton onClick={(v) => dispatch(changeParam(v))} value={tempParams[1].value} label={tempParams[1].label} activeValue={activeParam}  />
+                    </div>
+                </div>
 
 
-                <div className="flex justify-center">h</div>
+                <div className="flex justify-evenly md:justify-center md:col-span-1 col-span-4 py-8 md:py-0">
+                    <button onClick={() => dispatch(fetchWeatherInformation())} className={'bg-gray-500 text-white focus:outline-none px-3 py-1 rounded shadow text-xl font-roboto'}>Refresh</button>
+                </div>
             </div>
         </div>
     )

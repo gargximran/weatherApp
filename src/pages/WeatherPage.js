@@ -1,12 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
-import {insertData, weatherDataSelector} from "../store/slices/weatherSlice";
+import { weatherDataSelector, fetchWeatherInformation} from "../store/slices/weatherSlice";
 import {useEffect} from "react";
-import weatherService from "../helpers/weatherService";
 import LoadingScreen from "../components/loadingScreen";
 import WeatherScreen from "../components/weatherScreen";
 
-// helper function
-import weatherDataFormatter from '../helpers/weatherDataFormatter'
 
 
 const WeatherPage = () => {
@@ -15,18 +12,7 @@ const WeatherPage = () => {
 
     useEffect(() => {
 
-        const fetchData = async () => {
-            try{
-                const weatherInfo = await weatherService();
-
-                dispatch(insertData(weatherDataFormatter(weatherInfo)))
-
-
-            }catch(e) {
-                console.log(e)
-            }
-        }
-        fetchData();
+        dispatch(fetchWeatherInformation())
 
         // eslint-disable-next-line
     }, [])
