@@ -1,54 +1,37 @@
-import { useDispatch, useSelector } from 'react-redux';
-import {changeParam, weatherDataSelector, fetchWeatherInformation} from "../store/slices/weatherSlice";
+import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
 
-
-
-import RadioButton from "./RadioButton";
+import WeatherScreenHeader from "./weatherScreenHeader";
+import WeatherCardSlider from "./weatherCardSlider";
+import {createRef} from "react";
 
 
 const WeatherScreen = () => {
 
-    const dispatch = useDispatch();
-
-
-    const tempParams = [
-        {
-            label: 'Celsius',
-            value: 'c'
-        },
-        {
-            label: 'Fahrenheit',
-            value: 'f'
-        }
-    ]
-
-    const { param:activeParam } = useSelector(weatherDataSelector)
-
-
+    const slide = createRef()
 
 
     return (
         <div className="py-2 mt-5 w-full">
-            <div className="grid grid-cols-4">
-                <div className={'hidden md:block'}>
+            <WeatherScreenHeader
+                nextSlide={() => slide.current.slickNext()}
+                prevSlide={() => slide.current.slickPrev()}
+            />
 
+            <div className="grid grid-cols-12 mt-8 md:mt-16">
+                <div className="col-span-2 flex justify-center items-center">
+                    <FaArrowAltCircleLeft size={40} className={'text-gray-800 cursor-pointer hidden md:inline'}
+                                          onClick={() => slide.current.slickPrev()}/>
                 </div>
-                <div className="col-span-2 md:col-span-1">
-                    <div className={'flex justify-start md:justify-center pl-4'}>
-                        <RadioButton onClick={(v) => dispatch(changeParam(v))} value={tempParams[0].value} label={tempParams[0].label} activeValue={activeParam}  />
-                    </div>
+                <div className="col-span-8">
+                    <WeatherCardSlider ref={slide}/>
                 </div>
-                <div className="col-span-2 md:col-span-1">
-                    <div className="flex justify-end md:justify-center pr-4">
-                        <RadioButton onClick={(v) => dispatch(changeParam(v))} value={tempParams[1].value} label={tempParams[1].label} activeValue={activeParam}  />
-                    </div>
-                </div>
-
-
-                <div className="flex justify-evenly md:justify-center md:col-span-1 col-span-4 py-8 md:py-0">
-                    <button onClick={() => dispatch(fetchWeatherInformation())} className={'bg-gray-500 text-white focus:outline-none px-3 py-1 rounded shadow text-xl font-roboto'}>Refresh</button>
+                <div className="col-span-2 flex justify-center items-center">
+                    <FaArrowAltCircleRight size={40} className={'text-gray-800 cursor-pointer hidden md:inline'}
+                                           onClick={() => slide.current.slickNext()}/>
                 </div>
             </div>
+
+
         </div>
     )
 }

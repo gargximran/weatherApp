@@ -1,5 +1,6 @@
 export const kToC = (temp) => {
-    return temp - 273.15;
+    const converted = temp - 273.15
+    return converted.toFixed();
 }
 
 
