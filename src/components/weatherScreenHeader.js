@@ -18,21 +18,44 @@ const WeatherScreenHeader = ({prevSlide, nextSlide}) => {
             </div>
             <div className="col-span-2 md:col-span-1">
                 <div className={'flex justify-start md:justify-center pl-4'}>
-                    <RadioButton onClick={(v) => dispatch(changeParam(v))} value={'c'} label={'Celsius'} activeValue={activeParam}  />
+                    <RadioButton
+                        onClick={(v) => dispatch(changeParam(v))}
+                        value={'c'}
+                        label={'Celsius'}
+                        activeValue={activeParam}
+                    />
                 </div>
             </div>
             <div className="col-span-2 md:col-span-1">
                 <div className="flex justify-end md:justify-center pr-4">
-                    <RadioButton onClick={(v) => dispatch(changeParam(v))} value={'f'} label={'Fahrenheit'} activeValue={activeParam}  />
+                    <RadioButton
+                        onClick={(v) => dispatch(changeParam(v))}
+                        value={'f'}
+                        label={'Fahrenheit'}
+                        activeValue={activeParam}
+                    />
                 </div>
             </div>
 
 
             <div className="flex justify-evenly md:justify-center md:col-span-1 col-span-4 py-8 md:py-0">
-                <FaArrowAltCircleLeft size={30} className={'md:hidden text-gray-600 cursor-pointer'} onClick={() => prevSlide && prevSlide()}/>
-                <button onClick={() => dispatch(fetchWeatherInformation())} className={'bg-gray-500 text-white focus:outline-none px-3 py-1 rounded shadow text-xl font-roboto'}>Refresh</button>
+                <FaArrowAltCircleLeft
+                    size={30}
+                    className={'md:hidden text-gray-600 cursor-pointer'}
+                    onClick={() => prevSlide && prevSlide()}
+                />
+                <button
+                    onClick={() => dispatch(fetchWeatherInformation())}
+                    className={'bg-gray-500 text-white focus:outline-none px-3 py-1 rounded shadow text-xl font-roboto'}
+                >
+                    Refresh
+                </button>
 
-                <FaArrowAltCircleRight size={30} className={'md:hidden text-gray-600 cursor-pointer'} onClick={() => nextSlide && nextSlide()}/>
+                <FaArrowAltCircleRight
+                    size={30}
+                    className={'md:hidden text-gray-600 cursor-pointer'}
+                    onClick={() => nextSlide && nextSlide()}
+                />
             </div>
         </div>
     )

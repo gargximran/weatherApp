@@ -19,15 +19,24 @@ const WeatherScreen = () => {
 
             <div className="grid grid-cols-12 mt-8 md:mt-16">
                 <div className="col-span-2 flex justify-center items-center">
-                    <FaArrowAltCircleLeft size={40} className={'text-gray-800 cursor-pointer hidden md:inline'}
-                                          onClick={() => slide.current.slickPrev()}/>
+                    <FaArrowAltCircleLeft
+                        size={40}
+                        className={'text-gray-800 cursor-pointer hidden md:inline'}
+                        onClick={() => slide.current.slickPrev()}
+                    />
                 </div>
                 <div className="col-span-8">
-                    <WeatherCardSlider ref={slide}/>
+                    <WeatherCardSlider
+                        ref={slide}
+                        onSelectOneSlide={e => alert(e)}
+                    />
                 </div>
                 <div className="col-span-2 flex justify-center items-center">
-                    <FaArrowAltCircleRight size={40} className={'text-gray-800 cursor-pointer hidden md:inline'}
-                                           onClick={() => slide.current.slickNext()}/>
+                    <FaArrowAltCircleRight
+                        size={40}
+                        className={'text-gray-800 cursor-pointer hidden md:inline'}
+                        onClick={() => slide.current.slickNext()}
+                    />
                 </div>
             </div>
 
