@@ -55,7 +55,7 @@ const WeatherCardSlider = React.forwardRef(({ onSelectOneSlide, ...props}, ref) 
 
                     return (
                         <div key={day}>
-                            <div  className={'flex justify-center items-center'} onClick={() => onSelectOneSlide && onSelectOneSlide(weatherData.data[day])}>
+                            <div  className={'flex justify-center items-center'} onClick={() => onSelectOneSlide && onSelectOneSlide({...weatherData.data[day], day})}>
                                 <div className="w-64 bg-gray-200 shadow rounded p-4">
                                     <h2 className="text-lg md:text-xl font-roboto font-bold text-gray-700 text-center md:py-3 py-2">Temperature</h2>
 

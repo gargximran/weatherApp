@@ -75,6 +75,10 @@ const WeatherScreen = () => {
                 </div>
             </div>
 
+            <div className="container flex justify-center mx-auto mt-2">
+                hello
+            </div>
+
 
         </div>
     )
