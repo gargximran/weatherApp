@@ -7,6 +7,7 @@ import {changeCurrentIndex, slideTrackingData, selectItem} from "../store/slices
 import {useDispatch, useSelector} from 'react-redux'
 import {utilsData} from "../store/slices/utilsSlice";
 import {weatherDataSelector} from "../store/slices/weatherSlice";
+import BarChart from "./BarChart";
 
 
 const WeatherScreen = () => {
@@ -75,9 +76,7 @@ const WeatherScreen = () => {
                 </div>
             </div>
 
-            <div className="container flex justify-center mx-auto mt-2">
-                hello
-            </div>
+           <BarChart />
 
 
         </div>
