@@ -20,7 +20,7 @@ const WeatherPage = () => {
 
     return (
 
-        <div className={'container mx-auto h-screen overflow-hidden'}>
+        <div className={'container mx-auto h-screen'}>
             {
                 weatherData.loading ? <LoadingScreen/> : <WeatherScreen />
             }
