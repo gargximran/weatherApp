@@ -38,7 +38,24 @@ const BarChart = () => {
             <div>
                 <div className="px-5">
                     {
-                        selectedItem?.day && <Chart chartType="Bar" width="100%" height={250}  data={data2} options={{title: selectedItem?.day, colors: ['#6b7280', '#6b7280']}}/>
+                        selectedItem?.day && (
+                            <Chart
+                            chartType="Bar"
+                            width="100%"
+                            height={250}
+                            data={data2}
+                            options={
+                                {
+                                    title: selectedItem?.day,
+                                    colors: ['#6b7280', '#6b7280'],
+                                    animation: {
+                                        duration: 1000,
+                                        easing: 'out',
+                                        startup: true,
+                                    }
+                                }
+                            }
+                            />)
                     }
 
                 </div>
